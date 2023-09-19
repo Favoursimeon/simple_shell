@@ -228,7 +228,7 @@ void aux_help(void);
 void aux_help_alias(void);
 void aux_help_cd(void);
 
-/* get_help.c */
-int get_help(d_sh *datash);
+/* ghelp.c */
+int ghelp(d_sh *datash);
 
 #endif

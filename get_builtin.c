@@ -13,7 +13,7 @@ int (*get_builtin(char *cmd))(d_sh *)
 		{ "setenv", _setenv },
 		{ "unsetenv", _unsetenv },
 		{ "cd", cd_shell },
-		{ "help", get_help },
+		{ "help", ghelp },
 		{ NULL, NULL }
 	};
 	int i;
