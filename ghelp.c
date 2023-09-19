@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * get_help - function that retrieves help messages according builtin
+ * ghelp - function that retrieves help messages according builtin
  * @datash: data structure (args and input)
  * Return: Return 0
 */
-int get_help(d_sh *datash)
+int ghelp(d_sh *datash)
 {
 
 	if (datash->args[1] == 0)

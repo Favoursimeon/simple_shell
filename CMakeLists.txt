@@ -27,7 +27,7 @@ add_executable(simple_shell
         exit_shell.c
         get_builtin.c
         get_error.c
-        get_help.c
+        ghelp.c
         get_line.c
         get_sigint.c
         main.c
