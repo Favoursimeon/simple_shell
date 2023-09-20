@@ -31,7 +31,7 @@ void set_data(d_sh *data_shell, char **av)
 	unsigned int i;
 
 	data_shell->av = av;
-	data_shell->input = NULL;
+	data_shell->reg_inpute = NULL;
 	data_shell->args = NULL;
 	data_shell->status = 0;
 	data_shell->counter = 1;
@@ -43,7 +43,7 @@ void set_data(d_sh *data_shell, char **av)
 
 	for (i = 0; environ[i]; i++)
 	{
-		data_shell->_environ[i] = _strdup(environ[i]);
+		data_shell->_environ[i] = string_dup(environ[i]);
 	}
 
 	data_shell->_environ[i] = NULL;
@@ -63,7 +63,7 @@ int main(int ac, char **av)
 	d_sh data_shell;
 	(void) ac;
 
-	signal(SIGINT, get_sigint);
+	signal(SIGINT, get_signt);
 	set_data(&data_shell, av);
 	shell_loop(&data_shell);
 	free_data(&data_shell);

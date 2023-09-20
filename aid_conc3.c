@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * rev_string - rvs string.
- * @s: with a string input.
+ * reverse_str - rvs string.
+ * @s: with a string reg_inpute.
  * Return: no return.
  */
-void rev_string(char *s)
+void reverse_str(char *s)
 {
 	int count = 0, i, j;
 	char *str, temp;

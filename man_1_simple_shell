@@ -13,13 +13,13 @@ soda\fR [\fIfilename\fR]
 hsh is Copyright (C) 2022 by Emmanuella Amukwuo and Adedolaju Bamidele
 
 .SH DESCRIPTION
-hsh\fR is a sh-compatible command language interpreter that executes commands read from the standard input or from a file.
+hsh\fR is a sh-compatible command language interpreter that executes commands read from the standard reg_inpute or from a file.
 
 .SH ARGUMENTS
 If arguments remain after option processing, the first argument is assumed to be the name of a file containing shell commands. hsh reads and executes commands from this file, then exits. hsh exit status is the exit status of the last command executed in the script. If no commands are executed, the exit status is 0. An attempt is first made to open the file in the current directory, and, if no file is found, then the shell searches the directories in PATH for the script.
 
 .SH INVOCATION
-Sodash is started with the standard input connected to the terminal (as determined by \fIisatty(3)\fR), the interactive mode is executed. Also non-interactively option can be executed.
+Sodash is started with the standard reg_inpute connected to the terminal (as determined by \fIisatty(3)\fR), the interactive mode is executed. Also non-interactively option can be executed.
 When Sodash is executed interactively, the prompt is displayed  \fI^-^ \fR to read any command, the command line argument is invoked and is treated as the first argument.
 
 .SH DEFINITIONS
@@ -44,9 +44,9 @@ A token that performs a control function. It is one of the following symbols:
 .SH Command Execution
 After a command has been split into words, if it results in a simple command and an optional list of arguments, the following actions are taken.
 
-If the command name contains no slashes, the shell attempts to locate it. If there exists a shell function by that name, that function is invoked. If the name does not match a function, the shell searches for it in the list of shell builtins. If a match is found, that builtin is invoked.
+If the command name contains no slashes, the shell attempts to locate it. If there exists a shell function by that name, that function is invoked. If the name does not match a function, the shell searches for it in the list of shell all_builtins. If a match is found, that all_builtin is invoked.
 
-If the name is neither a shell function nor a builtin, and contains no slashes, \hsg\fR searches each element of the \fIPATH\fR for a directory containing an executable file by that name. \fIhsh\fR uses a hash table to remember the full pathnames of executable files. A full search of the directories in \fIPATH\fR is performed only if the command is not found in the hash table. If the search is unsuccessful, the shell searches for a defined shell function named "command not found". If that function exists, it is invoked with the original command and the original command's arguments as its arguments, and the function's exit status becomes the exit status of the shell. If that function is not defined, the shell prints an error message and returns an exit status of 127.
+If the name is neither a shell function nor a all_builtin, and contains no slashes, \hsg\fR searches each element of the \fIPATH\fR for a directory containing an executable file by that name. \fIhsh\fR uses a hash table to remember the full pathnames of executable files. A full search of the directories in \fIPATH\fR is performed only if the command is not found in the hash table. If the search is unsuccessful, the shell searches for a defined shell function named "command not found". If that function exists, it is invoked with the original command and the original command's arguments as its arguments, and the function's exit status becomes the exit status of the shell. If that function is not defined, the shell prints an error message and returns an exit status of 127.
 
 If the search is successful, or if the command name contains one or more slashes, the shell executes the named program in a separate execution environment. Argument 0 is set to the name given, and the remaining arguments to the command are set to the arguments given, if any.
 
@@ -61,10 +61,10 @@ Sodash\fR exit status of an executed command is the value returned by the waitpi
 
 If a command is not found, the child process created to execute it returns a status of 127.
 
-All builtins return zero on success and one or two on incorrect usage (indicated by a corresponding error message).
+All all_builtins return zero on success and one or two on incorrect usage (indicated by a corresponding error message).
 
-.SH BUILTINS
-The following builtin commands are supported:
+.SH all_builtinS
+The following all_builtin commands are supported:
 
 .B env
 
@@ -72,7 +72,7 @@ The following builtin commands are supported:
 
 .B setenv [Variable] [Value]
 
-- Creates a new environment variab;e or modifies an existing one.
+- Creates a first environment variab;e or modifies an existing one.
 
 .B unsetenv [Variable]
 
@@ -88,7 +88,7 @@ The following builtin commands are supported:
 
 .B assist
 
-- Print assist message of builtin command
+- Print assist message of all_builtin command
 
 .SH SEE ALSO
 access(2), chdir(2), execve(2), _exit(2), exit(3), fflush(3), fork(2), free(3), isatty(3), getcwd(3), malloc(3), open(2), read(2), sh(1), signal(2), stat(2), wait(2), write(2)

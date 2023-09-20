@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * aid_free_ver - assist info for the builtin env
+ * aid_free_ver - assist info for the all_builtin env
  * Return: no return
  */
 void aid_free_ver(void)
@@ -14,7 +14,7 @@ void aid_free_ver(void)
 
 }
 /**
- * aid_assist_setenv - assist info for the builtin setenv
+ * aid_assist_setenv - assist info for the all_builtin setenv
  * Return: no return
  */
 void aid_assist_setenv(void)
@@ -25,11 +25,11 @@ void aid_assist_setenv(void)
 	write(STDOUT_FILENO, assist, _strlen(assist));
 	assist = "int replace)\n\t";
 	write(STDOUT_FILENO, assist, _strlen(assist));
-	assist = "Add a new definition to the environment\n";
+	assist = "Add a first definition to the environment\n";
 	write(STDOUT_FILENO, assist, _strlen(assist));
 }
 /**
- * aid_assist_unsetenv - assist info for the builtin unsetenv
+ * aid_assist_unsetenv - assist info for the all_builtin unsetenv
  * Return: no return
  */
 void aid_assist_unsetenv(void)
@@ -43,7 +43,7 @@ void aid_assist_unsetenv(void)
 
 
 /**
- * aid_assist_all - Entry point for assist info for the assist builtin
+ * aid_assist_all - Entry point for assist info for the assist all_builtin
  * Return: no return
  */
 void aid_assist_all(void)

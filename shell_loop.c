@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * without_comment - deletes comments from the input
+ * without_comment - deletes comments from the reg_inpute
  *
- * @in: input string
- * Return: input without comments
+ * @in: reg_inpute string
+ * Return: reg_inpute without comments
  */
 char *without_comment(char *in)
 {
@@ -37,41 +37,41 @@ char *without_comment(char *in)
 
 /**
  * shell_loop - Loop of shell
- * @data_shell: data relevant (av, input, args)
+ * @data_shell: data relevant (av, reg_inpute, args)
  *
  * Return: no return.
  */
 void shell_loop(d_sh *data_shell)
 {
 	int loop, i_eof;
-	char *input;
+	char *reg_inpute;
 
 	loop = 1;
 	while (loop == 1)
 	{
 		write(STDIN_FILENO, "^-^ ", 4);
-		input = read_line(&i_eof);
+		reg_inpute = call_lines(&i_eof);
 		if (i_eof != -1)
 		{
-			input = without_comment(input);
-			if (input == NULL)
+			reg_inpute = without_comment(reg_inpute);
+			if (reg_inpute == NULL)
 				continue;
 
-			if (check_syntax_error(data_shell, input) == 1)
+			if (check_syntax_error(data_shell, reg_inpute) == 1)
 			{
 				data_shell->status = 2;
-				free(input);
+				free(reg_inpute);
 				continue;
 			}
-			input = rep_var(input, data_shell);
-			loop = divide_the_cmd(data_shell, input);
+			reg_inpute = rep_var(reg_inpute, data_shell);
+			loop = divide_the_comad_exec(data_shell, reg_inpute);
 			data_shell->counter += 1;
-			free(input);
+			free(reg_inpute);
 		}
 		else
 		{
 			loop = 0;
-			free(input);
+			free(reg_inpute);
 		}
 	}
 }

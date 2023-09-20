@@ -4,7 +4,7 @@
  * check_env - checks if the typed variable is an env variable
  *
  * @h: head of linked list
- * @in: input string
+ * @in: reg_inpute string
  * @data: data structure
  * Return: no return
  */
@@ -45,7 +45,7 @@ void check_env(r_var **h, char *in, d_sh *data)
  * check_vars - check if the typed variable is $$ or $?
  *
  * @h: head of the linked list
- * @in: input string
+ * @in: reg_inpute string
  * @st: last status of the Shell
  * @data: data structure
  * Return: no return
@@ -84,15 +84,15 @@ int check_vars(r_var **h, char *in, char *st, d_sh *data)
 }
 
 /**
- * replaced_input - replaces string into variables
+ * replaced_reg_inpute - replaces string into variables
  *
  * @head: head of the linked list
- * @input: input string
- * @new_input: new input string (replaced)
- * @nlen: new length
+ * @reg_inpute: reg_inpute string
+ * @first_reg_inpute: first reg_inpute string (replaced)
+ * @nlen: first length
  * Return: replaced string
  */
-char *replaced_input(r_var **head, char *input, char *new_input, int nlen)
+char *replaced_reg_inpute(r_var **head, char *reg_inpute, char *first_reg_inpute, int nlen)
 {
 	r_var *indx;
 	int i, j, k;
@@ -100,11 +100,11 @@ char *replaced_input(r_var **head, char *input, char *new_input, int nlen)
 	indx = *head;
 	for (j = i = 0; i < nlen; i++)
 	{
-		if (input[j] == '$')
+		if (reg_inpute[j] == '$')
 		{
 			if (!(indx->len_var) && !(indx->len_val))
 			{
-				new_input[i] = input[j];
+				first_reg_inpute[i] = reg_inpute[j];
 				j++;
 			}
 			else if (indx->len_var && !(indx->len_val))
@@ -117,7 +117,7 @@ char *replaced_input(r_var **head, char *input, char *new_input, int nlen)
 			{
 				for (k = 0; k < indx->len_val; k++)
 				{
-					new_input[i] = indx->val[k];
+					first_reg_inpute[i] = indx->val[k];
 					i++;
 				}
 				j += (indx->len_var);
@@ -127,36 +127,36 @@ char *replaced_input(r_var **head, char *input, char *new_input, int nlen)
 		}
 		else
 		{
-			new_input[i] = input[j];
+			first_reg_inpute[i] = reg_inpute[j];
 			j++;
 		}
 	}
 
-	return (new_input);
+	return (first_reg_inpute);
 }
 
 /**
  * rep_var - calls functions to replace string into vars
  *
- * @input: input string
+ * @reg_inpute: reg_inpute string
  * @data_shell: data structure
  * Return: replaced string
  */
-char *rep_var(char *input, d_sh *data_shell)
+char *rep_var(char *reg_inpute, d_sh *data_shell)
 {
 	r_var *head, *indx;
-	char *status, *new_input;
+	char *status, *first_reg_inpute;
 	int olen, nlen;
 
 	status = aid_func(data_shell->status);
 	head = NULL;
 
-	olen = check_vars(&head, input, status, data_shell);
+	olen = check_vars(&head, reg_inpute, status, data_shell);
 
 	if (head == NULL)
 	{
 		free(status);
-		return (input);
+		return (reg_inpute);
 	}
 
 	indx = head;
@@ -170,14 +170,14 @@ char *rep_var(char *input, d_sh *data_shell)
 
 	nlen += olen;
 
-	new_input = malloc(sizeof(char) * (nlen + 1));
-	new_input[nlen] = '\0';
+	first_reg_inpute = malloc(sizeof(char) * (nlen + 1));
+	first_reg_inpute[nlen] = '\0';
 
-	new_input = replaced_input(&head, input, new_input, nlen);
+	first_reg_inpute = replaced_reg_inpute(&head, reg_inpute, first_reg_inpute, nlen);
 
-	free(input);
+	free(reg_inpute);
 	free(status);
 	empty_of_reverselist(&head);
 
-	return (new_input);
+	return (first_reg_inpute);
 }

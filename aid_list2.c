@@ -11,28 +11,28 @@
  */
 r_var *addtion_of_reverseNode(r_var **head, int lvar, char *val, int lval)
 {
-	r_var *new, *temporaryVariable;
+	r_var *first, *temporaryVariable;
 
-	new = malloc(sizeof(r_var));
-	if (new == NULL)
+	first = malloc(sizeof(r_var));
+	if (first == NULL)
 		return (NULL);
 
-	new->len_var = lvar;
-	new->val = val;
-	new->len_val = lval;
+	first->len_var = lvar;
+	first->val = val;
+	first->len_val = lval;
 
-	new->next = NULL;
+	first->next = NULL;
 	temporaryVariable = *head;
 
 	if (temporaryVariable == NULL)
 	{
-		*head = new;
+		*head = first;
 	}
 	else
 	{
 		while (temporaryVariable->next != NULL)
 			temporaryVariable = temporaryVariable->next;
-		temporaryVariable->next = new;
+		temporaryVariable->next = first;
 	}
 
 	return (*head);

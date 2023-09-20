@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * get_len - Get the lenght of a number.
+ * getLength - Get the lenght of a number.
  * @n: type int number.
  * Return: Lenght of a number.
  */
-int get_len(int n)
+int getLength(int n)
 {
 	unsigned int n1;
 	int lenght = 1;
@@ -35,7 +35,7 @@ int get_len(int n)
 char *aid_func(int n)
 {
 	unsigned int n1;
-	int lenght = get_len(n);
+	int lenght = getLength(n);
 	char *buffer;
 
 	buffer = malloc(sizeof(char) * (lenght + 1));
@@ -66,11 +66,11 @@ char *aid_func(int n)
 }
 
 /**
- * _atoi - converts a string to an integer.
- * @s: input string.
+ * func - converts a string to an integer.
+ * @s: reg_inpute string.
  * Return: integer.
  */
-int _atoi(char *s)
+int func(char *s)
 {
 	unsigned int count = 0, size = 0, oi = 0, pn = 1, m = 1, i;
 

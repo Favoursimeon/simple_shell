@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * get_error - calls the error according the builtin, syntax or permission
+ * get_err - calls the error according the all_builtin, syntax or permission
  * @data_shell: data structure that contains arguments
  * @eval: error value
  * Return: error
  */
-int get_error(d_sh *data_shell, int eval)
+int get_err(d_sh *data_shell, int eval)
 {
 	char *error;
 

@@ -2,27 +2,27 @@
 
 /**
  * copy_info - copies info to create
- * a new env or alias
+ * a first env or alias
  * @name: name (env or alias)
  * @value: value (env or alias)
  *
- * Return: new env or alias.
+ * Return: first env or alias.
  */
 char *copy_info(char *name, char *value)
 {
-	char *new;
-	int len_name, len_value, len;
+	char *first;
+	int length_name, length_value, len;
 
-	len_name = _strlen(name);
-	len_value = _strlen(value);
-	len = len_name + len_value + 2;
-	new = malloc(sizeof(char) * (len));
-	_strcpy(new, name);
-	_strcat(new, "=");
-	_strcat(new, value);
-	_strcat(new, "\0");
+	length_name = _strlen(name);
+	length_value = _strlen(value);
+	len = length_name + length_value + 2;
+	first = malloc(sizeof(char) * (len));
+	_strcpy(first, name);
+	_strcat(first, "=");
+	_strcat(first, value);
+	_strcat(first, "\0");
 
-	return (new);
+	return (first);
 }
 
 /**
@@ -40,7 +40,7 @@ void set_env(char *name, char *value, d_sh *data_shell)
 
 	for (i = 0; data_shell->_environ[i]; i++)
 	{
-		var_env = _strdup(data_shell->_environ[i]);
+		var_env = string_dup(data_shell->_environ[i]);
 		name_env = _strtok(var_env, "=");
 		if (_strcmp(name_env, name) == 0)
 		{
@@ -52,7 +52,7 @@ void set_env(char *name, char *value, d_sh *data_shell)
 		free(var_env);
 	}
 
-	data_shell->_environ = _reallocdp(data_shell->_environ, i, sizeof(char *) * (i + 2));
+	data_shell->_environ = allo_dp(data_shell->_environ, i, sizeof(char *) * (i + 2));
 	data_shell->_environ[i] = copy_info(name, value);
 	data_shell->_environ[i + 1] = NULL;
 }
@@ -69,7 +69,7 @@ int _setenv(d_sh *data_shell)
 
 	if (data_shell->args[1] == NULL || data_shell->args[2] == NULL)
 	{
-		get_error(data_shell, -1);
+		get_err(data_shell, -1);
 		return (1);
 	}
 
@@ -93,13 +93,13 @@ int _unsetenv(d_sh *data_shell)
 
 	if (data_shell->args[1] == NULL)
 	{
-		get_error(data_shell, -1);
+		get_err(data_shell, -1);
 		return (1);
 	}
 	k = -1;
 	for (i = 0; data_shell->_environ[i]; i++)
 	{
-		var_env = _strdup(data_shell->_environ[i]);
+		var_env = string_dup(data_shell->_environ[i]);
 		name_env = _strtok(var_env, "=");
 		if (_strcmp(name_env, data_shell->args[1]) == 0)
 		{
@@ -109,7 +109,7 @@ int _unsetenv(d_sh *data_shell)
 	}
 	if (k == -1)
 	{
-		get_error(data_shell, -1);
+		get_err(data_shell, -1);
 		return (1);
 	}
 	realloc_environ = malloc(sizeof(char *) * (i));

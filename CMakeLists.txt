@@ -14,25 +14,25 @@ add_executable(simple_shell
         aid_list2.c
         aid_memory.c
         aid_stardlib.c
-        aux_str.c
-        aux_str2.c
-        aux_str3.c
-        cd.c
-        cd_shell.c
-        check_syntax_error.c
-        cmd_exec.c
+        aid_conc.c
+        aid_conc2.c
+        aid_conc3.c
+        build_cd.c
+        build_cdir_shell.c
+        all_error.c
+        comand_exec.c
         env1.c
         env2.c
-        exec_line.c
-        exit_shell.c
-        get_builtin.c
-        get_error.c
+        is_execute.c
+        dismiss_shell.c
+        get_all_builtin.c
+        get_err.c
         gassist.c
         get_line.c
-        get_sigint.c
+        get_signt.c
         main.c
         main.h
-        read_line.c
+        call_lines.c
         rep_var.c
         shell_loop.c
         split.c)

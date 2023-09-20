@@ -1,8 +1,8 @@
 #include "main.h"
 
 /**
- * gassist - function that retrieves assist messages according builtin
- * @data_shell: data structure (args and input)
+ * gassist - function that retrieves assist messages according all_builtin
+ * @data_shell: data structure (args and reg_inpute)
  * Return: Return 0
 */
 int gassist(d_sh *data_shell)

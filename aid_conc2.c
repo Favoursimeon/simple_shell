@@ -1,21 +1,21 @@
 #include "main.h"
 
 /**
- * _strdup - duplicates a str in the heap memory.
+ * string_dup - duplicates a str in the heap memory.
  * @s: Type char pointer str
  * Return: duplicated str
  */
-char *_strdup(const char *s)
+char *string_dup(const char *s)
 {
-	char *new;
+	char *first;
 	size_t len;
 
 	len = _strlen(s);
-	new = malloc(sizeof(char) * (len + 1));
-	if (new == NULL)
+	first = malloc(sizeof(char) * (len + 1));
+	if (first == NULL)
 		return (NULL);
-	_memcpy(new, s, len + 1);
-	return (new);
+	_memcpy(first, s, len + 1);
+	return (first);
 }
 
 /**
@@ -34,13 +34,13 @@ int _strlen(const char *s)
 }
 
 /**
- * cmp_chars - compare chars of strings
- * @str: input string.
+ * comp_char - compare chars of strings
+ * @str: reg_inpute string.
  * @delim: delimiter.
  *
  * Return: 1 if are equals, 0 if not.
  */
-int cmp_chars(char str[], const char *delim)
+int comp_char(char str[], const char *delim)
 {
 	unsigned int i, j, k;
 
@@ -62,7 +62,7 @@ int cmp_chars(char str[], const char *delim)
 
 /**
  * _strtok - splits a string by some delimiter.
- * @str: input string.
+ * @str: reg_inpute string.
  * @delim: delimiter.
  *
  * Return: string splited.
@@ -75,7 +75,7 @@ char *_strtok(char str[], const char *delim)
 
 	if (str != NULL)
 	{
-		if (cmp_chars(str, delim))
+		if (comp_char(str, delim))
 			return (NULL);
 		splitted = str; /*Store first address*/
 		i = _strlen(str);
@@ -113,7 +113,7 @@ char *_strtok(char str[], const char *delim)
 /**
  * _isdigit - defines if string passed is a number
  *
- * @s: input string
+ * @s: reg_inpute string
  * Return: 1 if string is a number. 0 in other case.
  */
 int _isdigit(const char *s)

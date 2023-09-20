@@ -1,19 +1,19 @@
 #include "main.h"
 
 /**
- * cd_dot - changes to the parent directory
+ * cdir_prev_dir - changes to the parent directory
  *
  * @data_shell: data relevant (environ)
  *
  * Return: no return
  */
-void cd_dot(d_sh *data_shell)
+void cdir_prev_dir(d_sh *data_shell)
 {
 	char pwd[PATH_MAX];
 	char *dir, *cp_pwd, *cp_strtok_pwd;
 
 	getcwd(pwd, sizeof(pwd));
-	cp_pwd = _strdup(pwd);
+	cp_pwd = string_dup(pwd);
 	set_env("OLDPWD", cp_pwd, data_shell);
 	dir = data_shell->args[1];
 	if (_strcmp(".", dir) == 0)
@@ -28,14 +28,14 @@ void cd_dot(d_sh *data_shell)
 		return;
 	}
 	cp_strtok_pwd = cp_pwd;
-	rev_string(cp_strtok_pwd);
+	reverse_str(cp_strtok_pwd);
 	cp_strtok_pwd = _strtok(cp_strtok_pwd, "/");
 	if (cp_strtok_pwd != NULL)
 	{
 		cp_strtok_pwd = _strtok(NULL, "\0");
 
 		if (cp_strtok_pwd != NULL)
-			rev_string(cp_strtok_pwd);
+			reverse_str(cp_strtok_pwd);
 	}
 	if (cp_strtok_pwd != NULL)
 	{
@@ -68,14 +68,14 @@ void cd_to(d_sh *data_shell)
 	dir = data_shell->args[1];
 	if (chdir(dir) == -1)
 	{
-		get_error(data_shell, 2);
+		get_err(data_shell, 2);
 		return;
 	}
 
-	cp_pwd = _strdup(pwd);
+	cp_pwd = string_dup(pwd);
 	set_env("OLDPWD", cp_pwd, data_shell);
 
-	cp_dir = _strdup(dir);
+	cp_dir = string_dup(dir);
 	set_env("PWD", cp_dir, data_shell);
 
 	free(cp_pwd);
@@ -87,25 +87,25 @@ void cd_to(d_sh *data_shell)
 }
 
 /**
- * cd_previous - changes to the previous directory
+ * cdir_prev - changes to the previous directory
  *
  * @data_shell: data relevant (environ)
  * Return: no return
  */
-void cd_previous(d_sh *data_shell)
+void cdir_prev(d_sh *data_shell)
 {
 	char pwd[PATH_MAX];
 	char *p_pwd, *p_oldpwd, *cp_pwd, *cp_oldpwd;
 
 	getcwd(pwd, sizeof(pwd));
-	cp_pwd = _strdup(pwd);
+	cp_pwd = string_dup(pwd);
 
 	p_oldpwd = _getenv("OLDPWD", data_shell->_environ);
 
 	if (p_oldpwd == NULL)
 		cp_oldpwd = cp_pwd;
 	else
-		cp_oldpwd = _strdup(p_oldpwd);
+		cp_oldpwd = string_dup(p_oldpwd);
 
 	set_env("OLDPWD", cp_pwd, data_shell);
 
@@ -129,18 +129,18 @@ void cd_previous(d_sh *data_shell)
 }
 
 /**
- * cd_to_home - changes to home directory
+ * cdir_home - changes to home directory
  *
  * @data_shell: data relevant (environ)
  * Return: no return
  */
-void cd_to_home(d_sh *data_shell)
+void cdir_home(d_sh *data_shell)
 {
 	char *p_pwd, *home;
 	char pwd[PATH_MAX];
 
 	getcwd(pwd, sizeof(pwd));
-	p_pwd = _strdup(pwd);
+	p_pwd = string_dup(pwd);
 
 	home = _getenv("HOME", data_shell->_environ);
 
@@ -153,7 +153,7 @@ void cd_to_home(d_sh *data_shell)
 
 	if (chdir(home) == -1)
 	{
-		get_error(data_shell, 2);
+		get_err(data_shell, 2);
 		free(p_pwd);
 		return;
 	}

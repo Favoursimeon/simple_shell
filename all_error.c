@@ -1,89 +1,89 @@
 #include "main.h"
 
 /**
- * repeated_char - counts the repetitions of a char
+ * rep_string - counts the repetitions of a char
  *
- * @input: input string
+ * @reg_inpute: reg_inpute string
  * @i: index
  * Return: repetitions
  */
-int repeated_char(char *input, int i)
+int rep_string(char *reg_inpute, int i)
 {
-	if (*(input - 1) == *input)
-		return (repeated_char(input - 1, i + 1));
+	if (*(reg_inpute - 1) == *reg_inpute)
+		return (rep_string(reg_inpute - 1, i + 1));
 
 	return (i);
 }
 
 /**
- * error_sep_op - finds syntax errors
+ * find_synt_err - finds syntax errors
  *
- * @input: input string
+ * @reg_inpute: reg_inpute string
  * @i: index
  * @last: last char read
  * Return: index of error. 0 when there are no
  * errors
  */
-int error_sep_op(char *input, int i, char last)
+int find_synt_err(char *reg_inpute, int i, char last)
 {
 	int count;
 
 	count = 0;
-	if (*input == '\0')
+	if (*reg_inpute == '\0')
 		return (0);
 
-	if (*input == ' ' || *input == '\t')
-		return (error_sep_op(input + 1, i + 1, last));
+	if (*reg_inpute == ' ' || *reg_inpute == '\t')
+		return (find_synt_err(reg_inpute + 1, i + 1, last));
 
-	if (*input == ';')
+	if (*reg_inpute == ';')
 		if (last == '|' || last == '&' || last == ';')
 			return (i);
 
-	if (*input == '|')
+	if (*reg_inpute == '|')
 	{
 		if (last == ';' || last == '&')
 			return (i);
 
 		if (last == '|')
 		{
-			count = repeated_char(input, 0);
+			count = rep_string(reg_inpute, 0);
 			if (count == 0 || count > 1)
 				return (i);
 		}
 	}
 
-	if (*input == '&')
+	if (*reg_inpute == '&')
 	{
 		if (last == ';' || last == '|')
 			return (i);
 
 		if (last == '&')
 		{
-			count = repeated_char(input, 0);
+			count = rep_string(reg_inpute, 0);
 			if (count == 0 || count > 1)
 				return (i);
 		}
 	}
 
-	return (error_sep_op(input + 1, i + 1, *input));
+	return (find_synt_err(reg_inpute + 1, i + 1, *reg_inpute));
 }
 
 /**
  * first_char - finds index of the first char
  *
- * @input: input string
+ * @reg_inpute: reg_inpute string
  * @i: index
  * Return: 1 if there is an error. 0 in other case.
  */
-int first_char(char *input, int *i)
+int first_char(char *reg_inpute, int *i)
 {
 
-	for (*i = 0; input[*i]; *i += 1)
+	for (*i = 0; reg_inpute[*i]; *i += 1)
 	{
-		if (input[*i] == ' ' || input[*i] == '\t')
+		if (reg_inpute[*i] == ' ' || reg_inpute[*i] == '\t')
 			continue;
 
-		if (input[*i] == ';' || input[*i] == '|' || input[*i] == '&')
+		if (reg_inpute[*i] == ';' || reg_inpute[*i] == '|' || reg_inpute[*i] == '&')
 			return (-1);
 
 		break;
@@ -93,32 +93,32 @@ int first_char(char *input, int *i)
 }
 
 /**
- * print_syntax_error - prints when a syntax error is found
+ * write_synt_err - prints when a syntax error is found
  *
  * @data_shell: data structure
- * @input: input string
+ * @reg_inpute: reg_inpute string
  * @i: index of the error
  * @bool: to control msg error
  * Return: no return
  */
-void print_syntax_error(d_sh *data_shell, char *input, int i, int bool)
+void write_synt_err(d_sh *data_shell, char *reg_inpute, int i, int bool)
 {
 	char *msg, *msg2, *msg3, *error, *counter;
 	int length;
 
-	if (input[i] == ';')
+	if (reg_inpute[i] == ';')
 	{
 		if (bool == 0)
-			msg = (input[i + 1] == ';' ? ";;" : ";");
+			msg = (reg_inpute[i + 1] == ';' ? ";;" : ";");
 		else
-			msg = (input[i - 1] == ';' ? ";;" : ";");
+			msg = (reg_inpute[i - 1] == ';' ? ";;" : ";");
 	}
 
-	if (input[i] == '|')
-		msg = (input[i + 1] == '|' ? "||" : "|");
+	if (reg_inpute[i] == '|')
+		msg = (reg_inpute[i + 1] == '|' ? "||" : "|");
 
-	if (input[i] == '&')
-		msg = (input[i + 1] == '&' ? "&&" : "&");
+	if (reg_inpute[i] == '&')
+		msg = (reg_inpute[i + 1] == '&' ? "&&" : "&");
 
 	msg2 = ": Syntax error: \"";
 	msg3 = "\" unexpected\n";
@@ -150,26 +150,26 @@ void print_syntax_error(d_sh *data_shell, char *input, int i, int bool)
  * find and print a syntax error
  *
  * @data_shell: data structure
- * @input: input string
+ * @reg_inpute: reg_inpute string
  * Return: 1 if there is an error. 0 in other case
  */
-int check_syntax_error(d_sh *data_shell, char *input)
+int check_syntax_error(d_sh *data_shell, char *reg_inpute)
 {
 	int begin = 0;
 	int f_char = 0;
 	int i = 0;
 
-	f_char = first_char(input, &begin);
+	f_char = first_char(reg_inpute, &begin);
 	if (f_char == -1)
 	{
-		print_syntax_error(data_shell, input, begin, 0);
+		write_synt_err(data_shell, reg_inpute, begin, 0);
 		return (1);
 	}
 
-	i = error_sep_op(input + begin, 0, *(input + begin));
+	i = find_synt_err(reg_inpute + begin, 0, *(reg_inpute + begin));
 	if (i != 0)
 	{
-		print_syntax_error(data_shell, input, begin + i, 1);
+		write_synt_err(data_shell, reg_inpute, begin + i, 1);
 		return (1);
 	}
 

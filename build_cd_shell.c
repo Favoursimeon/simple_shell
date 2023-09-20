@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * cd_shell - changes current directory
+ * cdir_shell - changes current directory
  *
  * @data_shell: data relevant
  * Return: 1 on success
  */
-int cd_shell(d_sh *data_shell)
+int cdir_shell(d_sh *data_shell)
 {
 	char *dir;
 	int ishome, ishome2, isddash;
@@ -22,19 +22,19 @@ int cd_shell(d_sh *data_shell)
 
 	if (dir == NULL || !ishome || !ishome2 || !isddash)
 	{
-		cd_to_home(data_shell);
+		cdir_home(data_shell);
 		return (1);
 	}
 
 	if (_strcmp("-", dir) == 0)
 	{
-		cd_previous(data_shell);
+		cdir_prev(data_shell);
 		return (1);
 	}
 
 	if (_strcmp(".", dir) == 0 || _strcmp("..", dir) == 0)
 	{
-		cd_dot(data_shell);
+		cdir_prev_dir(data_shell);
 		return (1);
 	}
 

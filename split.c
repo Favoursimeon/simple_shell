@@ -3,30 +3,30 @@
 /**
  * swap_some_characters - swaps | and & for non-printed chars
  *
- * @input: input string
+ * @reg_inpute: reg_inpute string
  * @bool: type of swap
  * Return: swapped string
  */
-char *swap_some_characters(char *input, int bool)
+char *swap_some_characters(char *reg_inpute, int bool)
 {
 	int i;
 
 	if (bool == 0)
 	{
-		for (i = 0; input[i]; i++)
+		for (i = 0; reg_inpute[i]; i++)
 		{
-			if (input[i] == '|')
+			if (reg_inpute[i] == '|')
 			{
-				if (input[i + 1] != '|')
-					input[i] = 16;
+				if (reg_inpute[i + 1] != '|')
+					reg_inpute[i] = 16;
 				else
 					i++;
 			}
 
-			if (input[i] == '&')
+			if (reg_inpute[i] == '&')
 			{
-				if (input[i + 1] != '&')
-					input[i] = 12;
+				if (reg_inpute[i + 1] != '&')
+					reg_inpute[i] = 12;
 				else
 					i++;
 			}
@@ -34,13 +34,13 @@ char *swap_some_characters(char *input, int bool)
 	}
 	else
 	{
-		for (i = 0; input[i]; i++)
+		for (i = 0; reg_inpute[i]; i++)
 		{
-			input[i] = (input[i] == 16 ? '|' : input[i]);
-			input[i] = (input[i] == 12 ? '&' : input[i]);
+			reg_inpute[i] = (reg_inpute[i] == 16 ? '|' : reg_inpute[i]);
+			reg_inpute[i] = (reg_inpute[i] == 12 ? '&' : reg_inpute[i]);
 		}
 	}
-	return (input);
+	return (reg_inpute);
 }
 
 /**
@@ -48,29 +48,29 @@ char *swap_some_characters(char *input, int bool)
  *
  * @head_s: head of separator list
  * @head_l: head of command lines list
- * @input: input string
+ * @reg_inpute: reg_inpute string
  * Return: no return
  */
-void add_separators(seperate_list **head_s, line_list **head_l, char *input)
+void add_separators(seperate_list **head_s, line_list **head_l, char *reg_inpute)
 {
 	int i;
 	char *line;
 
-	input = swap_some_characters(input, 0);
+	reg_inpute = swap_some_characters(reg_inpute, 0);
 
-	for (i = 0; input[i]; i++)
+	for (i = 0; reg_inpute[i]; i++)
 	{
-		if (input[i] == ';')
-			put_seperate_list(head_s, input[i]);
+		if (reg_inpute[i] == ';')
+			put_seperate_list(head_s, reg_inpute[i]);
 
-		if (input[i] == '|' || input[i] == '&')
+		if (reg_inpute[i] == '|' || reg_inpute[i] == '&')
 		{
-			put_seperate_list(head_s, input[i]);
+			put_seperate_list(head_s, reg_inpute[i]);
 			i++;
 		}
 	}
 
-	line = _strtok(input, ";|&");
+	line = _strtok(reg_inpute, ";|&");
 	do {
 		line = swap_some_characters(line, 1);
 		add_line_node_end(head_l, line);
@@ -122,14 +122,14 @@ void go_next(seperate_list **list_s, line_list **list_l, d_sh *data_shell)
 }
 
 /**
- * divide_the_cmd - splits command lines according to
+ * divide_the_comad_exec - splits command lines according to
  * the separators ;, | and &, and executes them
  *
  * @data_shell: data structure
- * @input: input string
+ * @reg_inpute: reg_inpute string
  * Return: 0 to exit, 1 to continue
  */
-int divide_the_cmd(d_sh *data_shell, char *input)
+int divide_the_comad_exec(d_sh *data_shell, char *reg_inpute)
 {
 
 	seperate_list *head_s, *list_s;
@@ -139,16 +139,16 @@ int divide_the_cmd(d_sh *data_shell, char *input)
 	head_s = NULL;
 	head_l = NULL;
 
-	add_separators(&head_s, &head_l, input);
+	add_separators(&head_s, &head_l, reg_inpute);
 
 	list_s = head_s;
 	list_l = head_l;
 
 	while (list_l != NULL)
 	{
-		data_shell->input = list_l->line;
-		data_shell->args = split_line(data_shell->input);
-		loop = exec_line(data_shell);
+		data_shell->reg_inpute = list_l->line;
+		data_shell->args = split_line(data_shell->reg_inpute);
+		loop = is_execute(data_shell);
 		free(data_shell->args);
 
 		if (loop == 0)
@@ -169,12 +169,12 @@ int divide_the_cmd(d_sh *data_shell, char *input)
 }
 
 /**
- * split_line - tokenizes the input string
+ * split_line - tokenizes the reg_inpute string
  *
- * @input: input string.
+ * @reg_inpute: reg_inpute string.
  * Return: string splitted.
  */
-char **split_line(char *input)
+char **split_line(char *reg_inpute)
 {
 	size_t bsize;
 	size_t i;
@@ -189,7 +189,7 @@ char **split_line(char *input)
 		exit(EXIT_FAILURE);
 	}
 
-	token = _strtok(input, TOK_DELIM);
+	token = _strtok(reg_inpute, TOK_DELIM);
 	tokens[0] = token;
 
 	for (i = 1; token != NULL; i++)
@@ -197,7 +197,7 @@ char **split_line(char *input)
 		if (i == bsize)
 		{
 			bsize += TOK_BUFSIZE;
-			tokens = _reallocdp(tokens, i, sizeof(char *) * bsize);
+			tokens = allo_dp(tokens, i, sizeof(char *) * bsize);
 			if (tokens == NULL)
 			{
 				write(STDERR_FILENO, ": allocation error\n", 18);
