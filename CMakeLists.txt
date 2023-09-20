@@ -10,10 +10,10 @@ add_executable(simple_shell
         aid_err2.c
         aid_assist.c
         aid_assist2.c
-        aux_lists.c
-        aux_lists2.c
-        aux_mem.c
-        aux_stdlib.c
+        aid_list.c
+        aid_list2.c
+        aid_memory.c
+        aid_stardlib.c
         aux_str.c
         aux_str2.c
         aux_str3.c

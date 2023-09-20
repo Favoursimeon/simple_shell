@@ -21,7 +21,7 @@ void check_env(r_var **h, char *in, d_sh *data)
 			if (_envr[row][chr] == '=')
 			{
 				lval = _strlen(_envr[row] + chr + 1);
-				add_rvar_node(h, j, _envr[row] + chr + 1, lval);
+				addtion_of_reverseNode(h, j, _envr[row] + chr + 1, lval);
 				return;
 			}
 
@@ -38,7 +38,7 @@ void check_env(r_var **h, char *in, d_sh *data)
 			break;
 	}
 
-	add_rvar_node(h, j, NULL, 0);
+	addtion_of_reverseNode(h, j, NULL, 0);
 }
 
 /**
@@ -62,19 +62,19 @@ int check_vars(r_var **h, char *in, char *st, d_sh *data)
 		if (in[i] == '$')
 		{
 			if (in[i + 1] == '?')
-				add_rvar_node(h, 2, st, lst), i++;
+				addtion_of_reverseNode(h, 2, st, lst), i++;
 			else if (in[i + 1] == '$')
-				add_rvar_node(h, 2, data->pid, lpd), i++;
+				addtion_of_reverseNode(h, 2, data->pid, lpd), i++;
 			else if (in[i + 1] == '\n')
-				add_rvar_node(h, 0, NULL, 0);
+				addtion_of_reverseNode(h, 0, NULL, 0);
 			else if (in[i + 1] == '\0')
-				add_rvar_node(h, 0, NULL, 0);
+				addtion_of_reverseNode(h, 0, NULL, 0);
 			else if (in[i + 1] == ' ')
-				add_rvar_node(h, 0, NULL, 0);
+				addtion_of_reverseNode(h, 0, NULL, 0);
 			else if (in[i + 1] == '\t')
-				add_rvar_node(h, 0, NULL, 0);
+				addtion_of_reverseNode(h, 0, NULL, 0);
 			else if (in[i + 1] == ';')
-				add_rvar_node(h, 0, NULL, 0);
+				addtion_of_reverseNode(h, 0, NULL, 0);
 			else
 				check_env(h, in + i, data);
 		}
@@ -177,7 +177,7 @@ char *rep_var(char *input, d_sh *data_shell)
 
 	free(input);
 	free(status);
-	free_rvar_list(&head);
+	empty_of_reverselist(&head);
 
 	return (new_input);
 }

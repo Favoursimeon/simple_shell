@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * _strcat - concatenate two strings
- * @dest: char pointer the dest of the copied str
- * @src: const char pointer the source of str
+ * _strcat - concatenate two chains of characters together.
+ * @dest: char potr the dest of cp str
+ * @src: const char of str
  * Return: the dest
  */
 char *_strcat(char *dest, const char *src)
@@ -24,7 +24,7 @@ char *_strcat(char *dest, const char *src)
 	return (dest);
 }
 /**
- * *_strcpy - Copies the string pointed to by src.
+ * *_strcpy - Copies str that is pntd by src, including the terminating null
  * @dest: Type char pointer the dest of the copied str
  * @src: Type char pointer the source of str
  * Return: the dest.

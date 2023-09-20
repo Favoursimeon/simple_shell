@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
- * swap_char - swaps | and & for non-printed chars
+ * swap_some_characters - swaps | and & for non-printed chars
  *
  * @input: input string
  * @bool: type of swap
  * Return: swapped string
  */
-char *swap_char(char *input, int bool)
+char *swap_some_characters(char *input, int bool)
 {
 	int i;
 
@@ -44,35 +44,35 @@ char *swap_char(char *input, int bool)
 }
 
 /**
- * add_nodes - add separators and command lines in the lists
+ * add_separators - add separators and command lines in the lists
  *
  * @head_s: head of separator list
  * @head_l: head of command lines list
  * @input: input string
  * Return: no return
  */
-void add_nodes(sep_list **head_s, line_list **head_l, char *input)
+void add_separators(seperate_list **head_s, line_list **head_l, char *input)
 {
 	int i;
 	char *line;
 
-	input = swap_char(input, 0);
+	input = swap_some_characters(input, 0);
 
 	for (i = 0; input[i]; i++)
 	{
 		if (input[i] == ';')
-			add_sep_node_end(head_s, input[i]);
+			put_seperate_list(head_s, input[i]);
 
 		if (input[i] == '|' || input[i] == '&')
 		{
-			add_sep_node_end(head_s, input[i]);
+			put_seperate_list(head_s, input[i]);
 			i++;
 		}
 	}
 
 	line = _strtok(input, ";|&");
 	do {
-		line = swap_char(line, 1);
+		line = swap_some_characters(line, 1);
 		add_line_node_end(head_l, line);
 		line = _strtok(NULL, ";|&");
 	} while (line != NULL);
@@ -87,10 +87,10 @@ void add_nodes(sep_list **head_s, line_list **head_l, char *input)
  * @data_shell: data structure
  * Return: no return
  */
-void go_next(sep_list **list_s, line_list **list_l, d_sh *data_shell)
+void go_next(seperate_list **list_s, line_list **list_l, d_sh *data_shell)
 {
 	int loop_sep;
-	sep_list *ls_s;
+	seperate_list *ls_s;
 	line_list *ls_l;
 
 	loop_sep = 1;
@@ -122,24 +122,24 @@ void go_next(sep_list **list_s, line_list **list_l, d_sh *data_shell)
 }
 
 /**
- * split_commands - splits command lines according to
+ * divide_the_cmd - splits command lines according to
  * the separators ;, | and &, and executes them
  *
  * @data_shell: data structure
  * @input: input string
  * Return: 0 to exit, 1 to continue
  */
-int split_commands(d_sh *data_shell, char *input)
+int divide_the_cmd(d_sh *data_shell, char *input)
 {
 
-	sep_list *head_s, *list_s;
+	seperate_list *head_s, *list_s;
 	line_list *head_l, *list_l;
 	int loop;
 
 	head_s = NULL;
 	head_l = NULL;
 
-	add_nodes(&head_s, &head_l, input);
+	add_separators(&head_s, &head_l, input);
 
 	list_s = head_s;
 	list_l = head_l;
@@ -160,7 +160,7 @@ int split_commands(d_sh *data_shell, char *input)
 			list_l = list_l->next;
 	}
 
-	free_sep_list(&head_s);
+	free_seperate_list(&head_s);
 	free_line_list(&head_l);
 
 	if (loop == 0)

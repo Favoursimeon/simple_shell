@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * add_rvar_node - adds a variable at the end
+ * addtion_of_reverseNode -let's you add a variable at the end of the node
  * of a r_var list.
  * @head: head of the linked list.
  * @lvar: length of the variable.
@@ -9,9 +9,9 @@
  * @lval: length of the value.
  * Return: address of the head.
  */
-r_var *add_rvar_node(r_var **head, int lvar, char *val, int lval)
+r_var *addtion_of_reverseNode(r_var **head, int lvar, char *val, int lval)
 {
-	r_var *new, *temp;
+	r_var *new, *temporaryVariable;
 
 	new = malloc(sizeof(r_var));
 	if (new == NULL)
@@ -22,39 +22,39 @@ r_var *add_rvar_node(r_var **head, int lvar, char *val, int lval)
 	new->len_val = lval;
 
 	new->next = NULL;
-	temp = *head;
+	temporaryVariable = *head;
 
-	if (temp == NULL)
+	if (temporaryVariable == NULL)
 	{
 		*head = new;
 	}
 	else
 	{
-		while (temp->next != NULL)
-			temp = temp->next;
-		temp->next = new;
+		while (temporaryVariable->next != NULL)
+			temporaryVariable = temporaryVariable->next;
+		temporaryVariable->next = new;
 	}
 
 	return (*head);
 }
 
 /**
- * free_rvar_list - frees a r_var list
+ * empty_of_reverselist - frees a r_var list
  * @head: head of the linked list.
  * Return: no return.
  */
-void free_rvar_list(r_var **head)
+void empty_of_reverselist(r_var **head)
 {
-	r_var *temp;
+	r_var *temporaryVariable;
 	r_var *curr;
 
 	if (head != NULL)
 	{
 		curr = *head;
-		while ((temp = curr) != NULL)
+		while ((temporaryVariable = curr) != NULL)
 		{
 			curr = curr->next;
-			free(temp);
+			free(temporaryVariable);
 		}
 		*head = NULL;
 	}

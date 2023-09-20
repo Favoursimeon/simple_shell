@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * aid_free_ver - assist information for the builtin env
+ * aid_free_ver - assist info for the builtin env
  * Return: no return
  */
 void aid_free_ver(void)
@@ -29,7 +29,7 @@ void aid_assist_setenv(void)
 	write(STDOUT_FILENO, assist, _strlen(assist));
 }
 /**
- * aid_assist_unsetenv - assist information for the builtin unsetenv
+ * aid_assist_unsetenv - assist info for the builtin unsetenv
  * Return: no return
  */
 void aid_assist_unsetenv(void)
@@ -43,7 +43,7 @@ void aid_assist_unsetenv(void)
 
 
 /**
- * aid_assist_all - Entry point for assist information for the assist builtin
+ * aid_assist_all - Entry point for assist info for the assist builtin
  * Return: no return
  */
 void aid_assist_all(void)
@@ -65,7 +65,7 @@ void aid_assist_all(void)
 	write(STDOUT_FILENO, assist, _strlen(assist));
 }
 /**
- * aid_assist_dismiss - assist information fot the builint exit
+ * aid_assist_dismiss - assist info fot the builint exit
  * Return: no return
  */
 void aid_assist_dismiss(void)

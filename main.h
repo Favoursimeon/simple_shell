@@ -42,16 +42,16 @@ typedef struct data
 } d_sh;
 
 /**
- * struct sep_list_s - single linked list
+ * struct seperate_list_s - single linked list
  * @separator: ; | &
  * @next: next node
  * Description: single linked list to store separators
  */
-typedef struct sep_list_s
+typedef struct seperate_list_s
 {
 	char separator;
-	struct sep_list_s *next;
-} sep_list;
+	struct seperate_list_s *next;
+} seperate_list;
 
 /**
  * struct ln_ls_s - single linked list
@@ -94,14 +94,14 @@ typedef struct builtin_s
 } builtin_t;
 
 /* aux_lists.c */
-sep_list *add_sep_node_end(sep_list **head, char sep);
-void free_sep_list(sep_list **head);
+seperate_list *put_seperate_list(seperate_list **head, char sep);
+void free_seperate_list(seperate_list **head);
 line_list *add_line_node_end(line_list **head, char *line);
 void free_line_list(line_list **head);
 
 /* aux_lists2.c */
-r_var *add_rvar_node(r_var **head, int lvar, char *var, int lval);
-void free_rvar_list(r_var **head);
+r_var *addtion_of_reverseNode(r_var **head, int lvar, char *var, int lval);
+void empty_of_reverselist(r_var **head);
 
 /* aux_str functions */
 char *_strcat(char *dest, const char *src);
@@ -140,10 +140,10 @@ void shell_loop(d_sh *data_shell);
 char *read_line(int *i_eof);
 
 /* split.c */
-char *swap_char(char *input, int bool);
-void add_nodes(sep_list **head_s, line_list **head_l, char *input);
-void go_next(sep_list **list_s, line_list **list_l, d_sh *data_shell);
-int split_commands(d_sh *data_shell, char *input);
+char *swap_some_characters(char *input, int bool);
+void add_separators(seperate_list **head_s, line_list **head_l, char *input);
+void go_next(seperate_list **list_s, line_list **list_l, d_sh *data_shell);
+int divide_the_cmd(d_sh *data_shell, char *input);
 char **split_line(char *input);
 
 /* rep_var.c */
