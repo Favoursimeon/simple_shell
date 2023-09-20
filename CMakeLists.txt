@@ -8,8 +8,8 @@ include_directories(.)
 add_executable(simple_shell
         aid_err1.c
         aid_err2.c
-        aux_help.c
-        aux_help2.c
+        aid_assist.c
+        aid_assist2.c
         aux_lists.c
         aux_lists2.c
         aux_mem.c
@@ -27,7 +27,7 @@ add_executable(simple_shell
         exit_shell.c
         get_builtin.c
         get_error.c
-        ghelp.c
+        gassist.c
         get_line.c
         get_sigint.c
         main.c

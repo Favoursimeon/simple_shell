@@ -216,19 +216,19 @@ int get_error(d_sh *data_shell, int eval);
 /* get_sigint.c */
 void get_sigint(int sig);
 
-/* aux_help.c */
-void aux_help_env(void);
-void aux_help_setenv(void);
-void aux_help_unsetenv(void);
-void aux_help_general(void);
-void aux_help_exit(void);
+/* aid_assist.c */
+void aid_free_ver(void);
+void aid_assist_setenv(void);
+void aid_assist_unsetenv(void);
+void aid_assist_all(void);
+void aid_assist_dismiss(void);
 
-/* aux_help2.c */
-void aux_help(void);
-void aux_help_alias(void);
-void aux_help_cd(void);
+/* aid_assist2.c */
+void aid_assist(void);
+void aid_assist_alias(void);
+void aid_assist_cd(void);
 
-/* ghelp.c */
-int ghelp(d_sh *data_shell);
+/* gassist.c */
+int gassist(d_sh *data_shell);
 
 #endif

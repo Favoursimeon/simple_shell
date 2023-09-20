@@ -86,9 +86,9 @@ The following builtin commands are supported:
 
 - Changes the current directory of the process to DIRECTORY.  If no argument is given, the command is interpreted as cd $HOME. If the argument - is given, the command is interpreted as cd $OLDPWD. The environment variables PWD and OLDPWD are updated after a change of directory.
 
-.B help
+.B assist
 
-- Print help message of builtin command
+- Print assist message of builtin command
 
 .SH SEE ALSO
 access(2), chdir(2), execve(2), _exit(2), exit(3), fflush(3), fork(2), free(3), isatty(3), getcwd(3), malloc(3), open(2), read(2), sh(1), signal(2), stat(2), wait(2), write(2)
