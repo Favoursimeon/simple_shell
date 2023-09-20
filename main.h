@@ -90,7 +90,7 @@ typedef struct r_var_list
 typedef struct builtin_s
 {
 	char *name;
-	int (*f)(d_sh *datash);
+	int (*f)(d_sh *data_shell);
 } builtin_t;
 
 /* aux_lists.c */
@@ -129,12 +129,12 @@ void rev_string(char *s);
 int repeated_char(char *input, int i);
 int error_sep_op(char *input, int i, char last);
 int first_char(char *input, int *i);
-void print_syntax_error(d_sh *datash, char *input, int i, int bool);
-int check_syntax_error(d_sh *datash, char *input);
+void print_syntax_error(d_sh *data_shell, char *input, int i, int bool);
+int check_syntax_error(d_sh *data_shell, char *input);
 
 /* shell_loop.c */
 char *without_comment(char *in);
-void shell_loop(d_sh *datash);
+void shell_loop(d_sh *data_shell);
 
 /* read_line.c */
 char *read_line(int *i_eof);
@@ -142,76 +142,76 @@ char *read_line(int *i_eof);
 /* split.c */
 char *swap_char(char *input, int bool);
 void add_nodes(sep_list **head_s, line_list **head_l, char *input);
-void go_next(sep_list **list_s, line_list **list_l, d_sh *datash);
-int split_commands(d_sh *datash, char *input);
+void go_next(sep_list **list_s, line_list **list_l, d_sh *data_shell);
+int split_commands(d_sh *data_shell, char *input);
 char **split_line(char *input);
 
 /* rep_var.c */
 void check_env(r_var **h, char *in, d_sh *data);
 int check_vars(r_var **h, char *in, char *st, d_sh *data);
 char *replaced_input(r_var **head, char *input, char *new_input, int nlen);
-char *rep_var(char *input, d_sh *datash);
+char *rep_var(char *input, d_sh *data_shell);
 
 /* get_line.c */
 void bring_line(char **lineptr, size_t *n, char *buffer, size_t j);
 ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
 
 /* exec_line */
-int exec_line(d_sh *datash);
+int exec_line(d_sh *data_shell);
 
 /* cmd_exec.c */
 int is_cdir(char *path, int *i);
 char *_which(char *cmd, char **_environ);
-int is_executable(d_sh *datash);
-int check_error_cmd(char *dir, d_sh *datash);
-int cmd_exec(d_sh *datash);
+int is_executable(d_sh *data_shell);
+int check_error_cmd(char *dir, d_sh *data_shell);
+int cmd_exec(d_sh *data_shell);
 
 /* env1.c */
 char *_getenv(const char *name, char **_environ);
-int _env(d_sh *datash);
+int _env(d_sh *data_shell);
 
 /* env2.c */
 char *copy_info(char *name, char *value);
-void set_env(char *name, char *value, d_sh *datash);
-int _setenv(d_sh *datash);
-int _unsetenv(d_sh *datash);
+void set_env(char *name, char *value, d_sh *data_shell);
+int _setenv(d_sh *data_shell);
+int _unsetenv(d_sh *data_shell);
 
 /* cd.c */
-void cd_dot(d_sh *datash);
-void cd_to(d_sh *datash);
-void cd_previous(d_sh *datash);
-void cd_to_home(d_sh *datash);
+void cd_dot(d_sh *data_shell);
+void cd_to(d_sh *data_shell);
+void cd_previous(d_sh *data_shell);
+void cd_to_home(d_sh *data_shell);
 
 /* cd_shell.c */
-int cd_shell(d_sh *datash);
+int cd_shell(d_sh *data_shell);
 
 /* get_builtin */
-int (*get_builtin(char *cmd))(d_sh *datash);
+int (*get_builtin(char *cmd))(d_sh *data_shell);
 
 /* _exit.c */
-int exit_shell(d_sh *datash);
+int exit_shell(d_sh *data_shell);
 
 /* aux_stdlib.c */
 int get_len(int n);
-char *aux_itoa(int n);
+char *aid_func(int n);
 int _atoi(char *s);
 
 /* aux_error1.c */
 char *strcat_cd(d_sh *, char *, char *, char *);
-char *error_get_cd(d_sh *datash);
-char *error_not_found(d_sh *datash);
-char *error_exit_shell(d_sh *datash);
+char *error_get_cd(d_sh *data_shell);
+char *error_not_found(d_sh *data_shell);
+char *shell_err(d_sh *data_shell);
 
 /* aux_error2.c */
 char *error_get_alias(char **args);
-char *error_env(d_sh *datash);
+char *err_ver(d_sh *data_shell);
 char *error_syntax(char **args);
 char *error_permission(char **args);
-char *error_path_126(d_sh *datash);
+char *error_path_126(d_sh *data_shell);
 
 
 /* get_error.c */
-int get_error(d_sh *datash, int eval);
+int get_error(d_sh *data_shell, int eval);
 
 /* get_sigint.c */
 void get_sigint(int sig);
@@ -229,6 +229,6 @@ void aux_help_alias(void);
 void aux_help_cd(void);
 
 /* ghelp.c */
-int ghelp(d_sh *datash);
+int ghelp(d_sh *data_shell);
 
 #endif

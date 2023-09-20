@@ -3,20 +3,20 @@
 /**
  * exec_line - finds builtins and commands
  *
- * @datash: data relevant (args)
+ * @data_shell: data relevant (args)
  * Return: 1 on success.
  */
-int exec_line(d_sh *datash)
+int exec_line(d_sh *data_shell)
 {
-	int (*builtin)(d_sh *datash);
+	int (*builtin)(d_sh *data_shell);
 
-	if (datash->args[0] == NULL)
+	if (data_shell->args[0] == NULL)
 		return (1);
 
-	builtin = get_builtin(datash->args[0]);
+	builtin = get_builtin(data_shell->args[0]);
 
 	if (builtin != NULL)
-		return (builtin(datash));
+		return (builtin(data_shell));
 
-	return (cmd_exec(datash));
+	return (cmd_exec(data_shell));
 }

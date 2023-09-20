@@ -139,19 +139,19 @@ char *replaced_input(r_var **head, char *input, char *new_input, int nlen)
  * rep_var - calls functions to replace string into vars
  *
  * @input: input string
- * @datash: data structure
+ * @data_shell: data structure
  * Return: replaced string
  */
-char *rep_var(char *input, d_sh *datash)
+char *rep_var(char *input, d_sh *data_shell)
 {
 	r_var *head, *indx;
 	char *status, *new_input;
 	int olen, nlen;
 
-	status = aux_itoa(datash->status);
+	status = aid_func(data_shell->status);
 	head = NULL;
 
-	olen = check_vars(&head, input, status, datash);
+	olen = check_vars(&head, input, status, data_shell);
 
 	if (head == NULL)
 	{

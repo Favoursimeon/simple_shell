@@ -84,10 +84,10 @@ void add_nodes(sep_list **head_s, line_list **head_l, char *input)
  *
  * @list_s: separator list
  * @list_l: command line list
- * @datash: data structure
+ * @data_shell: data structure
  * Return: no return
  */
-void go_next(sep_list **list_s, line_list **list_l, d_sh *datash)
+void go_next(sep_list **list_s, line_list **list_l, d_sh *data_shell)
 {
 	int loop_sep;
 	sep_list *ls_s;
@@ -99,7 +99,7 @@ void go_next(sep_list **list_s, line_list **list_l, d_sh *datash)
 
 	while (ls_s != NULL && loop_sep)
 	{
-		if (datash->status == 0)
+		if (data_shell->status == 0)
 		{
 			if (ls_s->separator == '&' || ls_s->separator == ';')
 				loop_sep = 0;
@@ -125,11 +125,11 @@ void go_next(sep_list **list_s, line_list **list_l, d_sh *datash)
  * split_commands - splits command lines according to
  * the separators ;, | and &, and executes them
  *
- * @datash: data structure
+ * @data_shell: data structure
  * @input: input string
  * Return: 0 to exit, 1 to continue
  */
-int split_commands(d_sh *datash, char *input)
+int split_commands(d_sh *data_shell, char *input)
 {
 
 	sep_list *head_s, *list_s;
@@ -146,15 +146,15 @@ int split_commands(d_sh *datash, char *input)
 
 	while (list_l != NULL)
 	{
-		datash->input = list_l->line;
-		datash->args = split_line(datash->input);
-		loop = exec_line(datash);
-		free(datash->args);
+		data_shell->input = list_l->line;
+		data_shell->args = split_line(data_shell->input);
+		loop = exec_line(data_shell);
+		free(data_shell->args);
 
 		if (loop == 0)
 			break;
 
-		go_next(&list_s, &list_l, datash);
+		go_next(&list_s, &list_l, data_shell);
 
 		if (list_l != NULL)
 			list_l = list_l->next;

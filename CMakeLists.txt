@@ -6,8 +6,8 @@ set(CMAKE_C_STANDARD 11)
 include_directories(.)
 
 add_executable(simple_shell
-        aux_error1.c
-        aux_error2.c
+        aid_err1.c
+        aid_err2.c
         aux_help.c
         aux_help2.c
         aux_lists.c
